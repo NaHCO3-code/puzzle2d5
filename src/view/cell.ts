@@ -127,7 +127,7 @@ export class Cell {
   animateRotation(deg: number, pos: Vector2) {
     const transitionTime = 500;
     const start = performance.now();
-    this.transforms.splice(3, 0, `translate(${-pos.x}px, ${-pos.y}px)`, `rotate(${deg}deg)`, `translate(${pos.x}px, ${pos.y}px)`);
+    this.transforms.splice(3, 3, `translate(${-pos.x}px, ${-pos.y}px)`, `rotate(${deg}deg)`, `translate(${pos.x}px, ${pos.y}px)`);
     this.svg.style.zIndex = "128";
     this.svg.style.transform = this.transforms.toReversed().join(" ");
     const f = () => {

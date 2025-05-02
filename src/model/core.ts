@@ -41,4 +41,10 @@ export class Core2D5 {
     this.gridY[x][z].depth = y;
     this.gridX[y][z].depth = x;
   }
+
+  reset(){
+    this.gridX = createGrid(this.size, () => ({depth: 0, type: 0}));
+    this.gridY = createGrid(this.size, () => ({depth: 0, type: 0}));
+    this.gridZ = createGrid(this.size, () => ({depth: 0, type: 0}));
+  }
 }

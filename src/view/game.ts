@@ -174,4 +174,19 @@ export class Game {
     this.gridY[x][z].animateRotation(60, center);
     this.gridZ[x][y].animateRotation(60, center);
   }
+
+  reset(){
+    this.engine.reset();
+    let cells = this.gridX.flat().concat(this.gridY.flat()).concat(this.gridZ.flat());
+    this.gridX = createGrid(this.engine.size, () => null).map((_, i) =>
+      cells.filter(c => c.type === CellType.A).slice(i * this.engine.size, (i + 1) * this.engine.size)
+    );
+    this.gridY = createGrid(this.engine.size, () => null).map((_, i) =>
+      cells.filter(c => c.type === CellType.B).slice(i * this.engine.size, (i + 1) * this.engine.size)
+    ); 
+    this.gridZ = createGrid(this.engine.size, () => null).map((_, i) =>
+      cells.filter(c => c.type === CellType.C).slice(i * this.engine.size, (i + 1) * this.engine.size)
+    );
+    this.render(this.engine);
+  }
 }

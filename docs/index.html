@@ -5,15 +5,65 @@
     <link rel="icon" type="image/svg+xml" href="/puzzle2d5/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.5D Puzzle</title>
-    <script type="module" crossorigin src="/puzzle2d5/assets/index-Dwqur1_x.js"></script>
-    <link rel="stylesheet" crossorigin href="/puzzle2d5/assets/index-CfjA3vLe.css">
+    <script type="module" crossorigin src="/puzzle2d5/assets/index-BVH7arSG.js"></script>
+    <link rel="stylesheet" crossorigin href="/puzzle2d5/assets/index-D__uW7dM.css">
   </head>
   <body>
     <div id="app">
+      <h1>2.5D Puzzle</h1>
+      <div id="controls">
+        <button id="about-button">What's this?</button>
+        <button id="reset-button">Reset</button>
+      </div>
       <div id="game">
         <div id="anchor"></div>
       </div>
     </div>
-    <div id="test"></div>
+    <dialog id="about-dialog">
+      <h2>What's this?</h2>
+      <p>
+        2.5D Puzzle 是一个益智小游戏，灵感来源于正六边形一些良好的性质。
+      </p>
+      <p>
+        有趣的是，尽管这是一个平面图形，但是它看上去就像是一个由多个小正方体堆叠形成的立方体。
+      </p>
+      <p>
+        你可以点击三个相邻并且组成一个正六边形的菱形，将这个正六边形旋转。
+      </p>
+      <p>
+        进行一次旋转操作后，看上去就像是拿走或放上了一个小正方体！
+      </p>
+      <p>
+        游戏目标是使得所有“立方体”看上去都被拿走了，并且底面、左面、侧面的所有菱形颜色相同。
+      </p>
+      <p>
+        换句话说，就是把这个最大的正六边形旋转30度。
+      </p>
+      <p>
+        祝你玩得开心！
+      </p>
+      <p>
+        2.5D Puzzle is a puzzle game that uses some good properties of regular hexagons.
+      </p>
+      <p>
+        But something interesting is that although it is a plane figure, it looks like a cube formed by stacking multiple small cubes.
+      </p>
+      <p>
+        You can click on three adjacent rhombuses that form a regular hexagon to rotate the hexagon.
+      </p>
+      <p>
+        After rotating a hexagon, it looks like you take away or put back one small cube!
+      </p>
+      <p>
+        The goal of the game is to make all "cubes" look like they have been taken away, and the colors of the bottom, left, and side faces are the same.
+      </p>
+      <p>
+        In other words, rotate the largest regular hexagon by 30 degrees.
+      </p>
+      <p>
+        Have fun!
+      </p>
+      <button id="close-about">Close</button>
+    </dialog>
   </body>
 </html>
