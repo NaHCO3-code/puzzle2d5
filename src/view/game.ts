@@ -12,11 +12,11 @@ export class Game {
   anchor: HTMLElement;
   container: HTMLElement;
 
-  constructor(public gridSize: number, public engine: Core2D5) {
+  constructor(public cellHeight: number, public engine: Core2D5) {
     const size = this.engine.size;
-    this.gridX = createGrid(size, () => new Cell(CellType.A));
-    this.gridY = createGrid(size, () => new Cell(CellType.B));
-    this.gridZ = createGrid(size, () => new Cell(CellType.C));
+    this.gridX = createGrid(size, () => new Cell(cellHeight, CellType.A));
+    this.gridY = createGrid(size, () => new Cell(cellHeight, CellType.B));
+    this.gridZ = createGrid(size, () => new Cell(cellHeight, CellType.C));
     this.anchor = document.getElementById("anchor") as HTMLElement;
     this.container = document.getElementById("game") as HTMLElement;
     this.initGrid();
@@ -27,6 +27,16 @@ export class Game {
     Signals.render.subscribe(this.render.bind(this));
     Signals.select.subscribe(this.onSelect.bind(this));
     Signals.unselect.subscribe(this.onUnselect.bind(this));
+  }
+
+  destroy(){
+    Signals.render.unsubscribe(this.render.bind(this));
+    Signals.select.unsubscribe(this.onSelect.bind(this));
+    Signals.unselect.unsubscribe(this.onUnselect.bind(this));
+    this.clearSelected();
+    this.gridX.forEach(row => row.forEach(cell => cell.destroy()));
+    this.gridY.forEach(row => row.forEach(cell => cell.destroy()));
+    this.gridZ.forEach(row => row.forEach(cell => cell.destroy()));
   }
 
   private selectedCells: {x: Cell | null, y: Cell | null, z: Cell | null} = {
@@ -151,8 +161,8 @@ export class Game {
     this.render(this.engine);
     const sqrt3 = Math.sqrt(3);
     const center = new Vector2(
-      (y - x) * Cell.height * sqrt3 / 2,
-      (2 * z - x - y) * Cell.height / 2
+      (y - x) * this.cellHeight * sqrt3 / 2,
+      (2 * z - x - y) * this.cellHeight / 2
     )
     console.log("dent", x, y, z, center);
     this.gridX[y][z].animateRotation(60, center);
@@ -167,8 +177,8 @@ export class Game {
     this.render(this.engine);
     const sqrt3 = Math.sqrt(3);
     const center = new Vector2(
-      (y - x) * Cell.height * sqrt3 / 2,
-      (2 * z - x - y) * Cell.height / 2
+      (y - x) * this.cellHeight * sqrt3 / 2,
+      (2 * z - x - y) * this.cellHeight / 2
     )
     this.gridX[y][z].animateRotation(60, center);
     this.gridY[x][z].animateRotation(60, center);
@@ -187,6 +197,7 @@ export class Game {
     this.gridZ = createGrid(this.engine.size, () => null).map((_, i) =>
       cells.filter(c => c.type === CellType.C).slice(i * this.engine.size, (i + 1) * this.engine.size)
     );
+    this.clearSelected();
     this.render(this.engine);
   }
 }

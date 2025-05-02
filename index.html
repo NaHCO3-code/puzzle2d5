@@ -12,6 +12,10 @@
       <div id="controls">
         <button id="about-button">What's this?</button>
         <button id="reset-button">Reset</button>
+        <label for="size-input" style="z-index: 16384;">Size:</label>
+        <input id="size-input" type="range" min="10" max="200" step="1" value="100" style="z-index: 16384;" />
+        <label for="order-input" style="z-index: 16384;">Order:</label>
+        <input id="order-input" type="range" min="2" max="16" step="1" value="2" style="z-index: 16384;" />
       </div>
       <div id="game">
         <div id="anchor"></div>
@@ -32,10 +36,7 @@
         进行一次旋转操作后，看上去就像是拿走或放上了一个小正方体！
       </p>
       <p>
-        游戏目标是使得所有“立方体”看上去都被拿走了，并且底面、左面、侧面的所有菱形颜色相同。
-      </p>
-      <p>
-        换句话说，就是把这个最大的正六边形旋转30度。
+        游戏目标是使得所有“立方体”看上去都被拿走了，并且底面所有菱形颜色相同，侧面的每一层颜色相同。当然，你也可以拼接出任意你喜欢的图形。
       </p>
       <p>
         祝你玩得开心！
@@ -53,14 +54,13 @@
         After rotating a hexagon, it looks like you take away or put back one small cube!
       </p>
       <p>
-        The goal of the game is to make all "cubes" look like they have been taken away, and the colors of the bottom, left, and side faces are the same.
-      </p>
-      <p>
-        In other words, rotate the largest regular hexagon by 30 degrees.
+        The goal of the game is to make all "cubes" look like they have been taken away, and the colors of the bottom all rhombuses are the same, and each layer of the side faces is the same color. 
       </p>
       <p>
         Have fun!
       </p>
+      <img id="goal-image" height="300px"/>
+      <br/>
       <button id="close-about">Close</button>
     </dialog>
     <script type="module" src="/src/main.ts"></script>

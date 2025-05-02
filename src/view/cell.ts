@@ -12,9 +12,8 @@ export class Cell {
   y: number = 0;
   z: number = 0;
 
-  static height = 100;
-
   constructor(
+    public height: number,
     public type: CellType = CellType.A,
     public axis: "x" | "y" | "z" = "z"
   ) {
@@ -35,8 +34,8 @@ export class Cell {
 
     this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     this.svg.setAttribute("class", "rhombus");
-    this.svg.setAttribute("width", `${Cell.height * 1.73205}`);
-    this.svg.setAttribute("height", `${Cell.height}`);
+    this.svg.setAttribute("width", `${this.height * 1.73205}`);
+    this.svg.setAttribute("height", `${this.height}`);
     this.svg.setAttribute("viewBox", `0 0 177 103`);
     this.svg.setAttribute("fill", "#fff");
     this.svg.setAttribute("stroke", "#000");
@@ -53,6 +52,11 @@ export class Cell {
     }
 
     Signals.mouseDown.subscribe(this.onMouseDown.bind(this));
+  }
+
+  destroy() {
+    Signals.mouseDown.unsubscribe(this.onMouseDown.bind(this));
+    this.svg.remove();
   }
 
   private onMouseDown(event: MouseEvent){
@@ -80,7 +84,7 @@ export class Cell {
     this.z = z;
     this.axis = axis;
     const sqrt3 = Math.sqrt(3);
-    const height = Cell.height - 2;
+    const height = this.height - 2;
     const paddingDelta = 0.5;
     // 位置修正，把菱形的一个顶点移动到锚点位置
     switch (axis) {
@@ -116,7 +120,7 @@ export class Cell {
   render(axis: "x" | "y" | "z", x: number, y: number, z: number) {
     this.calcTransform(axis, x, y, z);
     this.svg.style.transform = this.transforms.toReversed().join(" ");
-    this.svg.style.filter = this.selected ? "brightness(1.3)" : "";
+    this.svg.style.filter = this.selected ? "brightness(1.5)" : "";
   }
 
   /**
